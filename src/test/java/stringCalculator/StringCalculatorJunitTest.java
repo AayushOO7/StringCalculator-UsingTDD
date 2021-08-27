@@ -38,5 +38,13 @@ class StringCalculatorJunitTest {
 		actualResult=StringCalculatorMain.addNumbers(input);
 		assertEquals(expectedResult, actualResult, "Should return sum of two numbers which are given as input String");
 	}
+	
+	@Test
+	void checkForMultipleNumbers() {    //Check when string contains unknown amount of numbers, separated by comma(,).
+		String input=new String("5,7,5,3,4,1");
+		expectedResult=25;
+		actualResult=StringCalculatorMain.addNumbers(input);
+		assertEquals(expectedResult, actualResult, "Should return sum of all numbers present in input String");
+	}
 
 }
