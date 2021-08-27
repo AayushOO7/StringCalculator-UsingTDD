@@ -46,5 +46,13 @@ class StringCalculatorJunitTest {
 		actualResult=StringCalculatorMain.addNumbers(input);
 		assertEquals(expectedResult, actualResult, "Should return sum of all numbers present in input String");
 	}
+	
+	@Test
+	void shouldAcceptNewLineDelimiter() {    //Check when string contains numbers separated by comma(,) and/or new line(\n).
+		String input=new String("5\n7\n5,3,4\n1,10");
+		expectedResult=35;
+		actualResult=StringCalculatorMain.addNumbers(input);
+		assertEquals(expectedResult, actualResult, "Should return sum of all numbers present in input String and accpet new line delimiter");
+	}
 
 }

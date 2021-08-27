@@ -9,7 +9,7 @@ public class StringCalculatorMain {
 			finalResult = 0;
 		}
 		else if(numbers.contains(",")){    //Add unknown amount of numbers which are present in Input.
-			String stringNumberArray[] = numbers.split(",");
+			String stringNumberArray[] = numbers.split("[,\n]");
 			int arrayLength = stringNumberArray.length;
 			int integerNumber = 0;
 			for(int index = 0; index < arrayLength; index++) {
