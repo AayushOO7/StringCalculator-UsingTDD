@@ -27,7 +27,7 @@ public class StringCalculatorMain {
 			String stringNumberArray[] = numbers.split(delimiter);
 			finalResult = calculateSum(stringNumberArray);
 		}
-		else if(numbers.contains(",")){ 
+		else if(numbers.contains(",") || numbers.contains("\n")){ 
 			String stringNumberArray[] = numbers.split("[,\n]");  
 			finalResult = calculateSum(stringNumberArray);
 		}
