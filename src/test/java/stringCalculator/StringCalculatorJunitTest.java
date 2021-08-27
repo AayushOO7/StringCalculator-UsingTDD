@@ -87,5 +87,13 @@ class StringCalculatorJunitTest {
 		actualResult = StringCalculatorMain.addNumbers(input);
 		assertEquals(expectedResult, actualResult, "Ignore number(s) greater than 1000 and eturn sum of numbers present in input String");
 	}
+	
+	@Test
+	void shouldAcceptAnyLengthCustomDelimiter() {    //Check when string contains numbers separated by a single custom delimiter of any length.
+		String input = new String("//[***]\n1***4***3***2***5");
+		expectedResult = 15;
+		actualResult = StringCalculatorMain.addNumbers(input);
+		assertEquals(expectedResult, actualResult, "Should return sum of all numbers present in input String separated by a single custom delimiter of any length");
+	}
 
 }
