@@ -1,5 +1,7 @@
 package stringCalculator;
 
+import java.util.ArrayList;
+
 public class StringCalculatorMain {
 	
 	public static int addNumbers(String numbers) {
@@ -8,10 +10,10 @@ public class StringCalculatorMain {
 		if(numbers.isEmpty() || numbers == null) {
 			finalResult = 0;
 		}
-		else if(numbers.startsWith("//[")) {    //Separate by single custom delimiter of any length.
-			String delimiter = getDelimiter(numbers);
+		else if(numbers.startsWith("//[")) {    //Separate by single and/or multiple custom delimiter of any length.
+			String delimiterList[] = getDelimiterList(numbers);
 			numbers = numbers.substring(numbers.indexOf('\n')+1);
-			numbers = extractNumberList(delimiter, numbers);
+			numbers = extractNumberList(delimiterList, numbers);
 			String stringNumberArray[] = numbers.split(",");
 			finalResult = calculateSum(stringNumberArray);
 		}
@@ -26,13 +28,8 @@ public class StringCalculatorMain {
 			finalResult = calculateSum(stringNumberArray);
 		}
 		else if(numbers.contains(",")){ 
-			String stringNumberArray[] = numbers.split("[,\n]");
-			int arrayLength = stringNumberArray.length;
-			int integerNumber = 0;
-			for(int index = 0; index < arrayLength; index++) {
-				integerNumber = stringToInteger(stringNumberArray[index]);
-				finalResult = finalResult + integerNumber;
-			}
+			String stringNumberArray[] = numbers.split("[,\n]");  
+			finalResult = calculateSum(stringNumberArray);
 		}
 		else {
 			finalResult = stringToInteger(numbers); 
@@ -41,42 +38,56 @@ public class StringCalculatorMain {
 		
 	}
 	
-	public static String getDelimiter(String numbers) {
+	public static String[] getDelimiterList(String numbers) {
 		
-		String delimiter = new String("");
-		delimiter = numbers.substring(numbers.indexOf('[') + 1, numbers.indexOf('\n') - 1);
-		return delimiter;   //extract delimiter from Input string.
+		ArrayList<String> delimiter = new ArrayList<String>();
+		while(numbers.indexOf('[') != -1) {
+			delimiter.add(numbers.substring(numbers.indexOf('[') + 1, numbers.indexOf(']')));
+			numbers = numbers.substring(numbers.indexOf(']') + 1);
+		}
+		return delimiter.toArray(new String[0]);   //extract all delimiters from Input string.
 		
 	}
 
-	public static String extractNumberList(String delimiter,String inputString) {
+	public static String extractNumberList(String delimiterList[], String inputString) {
 		
-		String numberList = "";
+		String numberList = new String("");
 		int index = 0;
 		while(index < inputString.length()) {
-			if(isExactDelimiterFoundInInput(index, delimiter, inputString)) {
-				index = index + (delimiter.length());     //Skip Delimiter
+			int delimiterLength = scanForExactDelimiterInInput(index, delimiterList, inputString);
+			if(delimiterLength>0) {
+				index = index + delimiterLength - 1;     //Skip Delimiter
 			}
-			else {
+			else{
 				numberList = numberList + inputString.charAt(index) + ",";     //Extract numbers(digits) from input string
-				index++;
 			}
+			index++;
 		}
-		return numberList;    //Return string with only numbers which are separated by comma(,).
+		return numberList;  //Return List of numbers from inputString
 		
 	}
 
-	public static boolean isExactDelimiterFoundInInput(int checkLocation, String delimiter, String inputString) {
+	public static int scanForExactDelimiterInInput(int checkLocation, String[] delimiterList, String inputString) {
 		
-		int counter = 0;
-		while(counter < delimiter.length()) {
-			if(delimiter.charAt(counter) != inputString.charAt(checkLocation)) {
-				return false;    //Exact match of delimiter not found in Input.
+		int savedLocation = checkLocation;
+		for(String delimiter:delimiterList) {
+			int counter = 0, countElse=0;
+			while(counter < delimiter.length()) {
+				if(delimiter.charAt(counter) != inputString.charAt(checkLocation)) {
+					break;
+				}
+				else {
+					countElse++;
+				}
+				checkLocation++;
+				counter++;
 			}
-			checkLocation++;
-			counter++;
+			if(delimiter.length() == countElse) {
+				return delimiter.length();
+			}
+			checkLocation = savedLocation;
 		}
-		return true;    //Exact match of delimiter found in Input.
+		return -1;
 		
 	}
 	

@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
-
 class StringCalculatorJunitTest {
 
 	private int expectedResult, actualResult;
@@ -94,6 +93,22 @@ class StringCalculatorJunitTest {
 		expectedResult = 15;
 		actualResult = StringCalculatorMain.addNumbers(input);
 		assertEquals(expectedResult, actualResult, "Should return sum of all numbers present in input String separated by a single custom delimiter of any length");
+	}
+	
+	@Test
+	void shouldAcceptMultipleCustomDelimiter() {    //Check when string contains numbers separated by Multiple custom delimiter of length one.
+		String input=new String("//[*][%][;]\n1*4%3*2%5;5");
+		expectedResult=20;
+		actualResult=StringCalculatorMain.addNumbers(input);
+		assertEquals(expectedResult, actualResult, "Should return sum of all numbers present in input String separated by Multiple custom delimiter of length one");
+	}
+	
+	@Test
+	void shouldAcceptAnyLengthMultipleCustomDelimiter() {    //Check when string contains numbers separated by Multiple custom delimiter of Any Length.
+		String input=new String("//[****][%%][;;]\n1****4%%3****2%%5;;5%%5;;5");
+		expectedResult=30;
+		actualResult=StringCalculatorMain.addNumbers(input);
+		assertEquals(expectedResult, actualResult, "Should return sum of all numbers present in input String separated by Multiple custom delimiter of Any Length");
 	}
 
 }
