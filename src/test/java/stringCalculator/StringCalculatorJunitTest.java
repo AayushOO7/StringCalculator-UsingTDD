@@ -79,5 +79,13 @@ class StringCalculatorJunitTest {
 			StringCalculatorMain.addNumbers(input);
 		});
 	}
+	
+	@Test
+	void shouldIgnoreNumbersGreaterThanThousand() {    //Check when string contains numbers greater than 1000.
+		String input = new String("//.\n1.4.5.1000.1001.100012.23232.999");
+		expectedResult = 2009;
+		actualResult = StringCalculatorMain.addNumbers(input);
+		assertEquals(expectedResult, actualResult, "Ignore number(s) greater than 1000 and eturn sum of numbers present in input String");
+	}
 
 }

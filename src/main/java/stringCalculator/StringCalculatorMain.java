@@ -35,6 +35,7 @@ public class StringCalculatorMain {
 	}
 	
 	public static int calculateSum(String[] array) {
+		
 		int sum = 0;
 		boolean isExceptionOccured = false;
 		String negativeNumberList = new String("");
@@ -53,12 +54,21 @@ public class StringCalculatorMain {
 		else {    //If all numbers are positive then return sum.
 			return sum;
 		}
+		
 	}
 	
 	public static int stringToInteger(String stringValue) {
 		
+		if(stringValue.isEmpty()) {
+			return 0;
+		}
 		int result = Integer.parseInt(stringValue);
-		return result;
+		if(result > 1000) {   //Don't add if number is greater than 1000
+			return 0;
+		}
+		else {
+			return result;
+		}
 		
 	}
 	
