@@ -71,5 +71,13 @@ class StringCalculatorJunitTest {
 		actualResult = StringCalculatorMain.addNumbers(input);
 		assertEquals(expectedResult, actualResult, "Should return sum of all numbers present in input String separated by Dot as a single custom delimiter");
 	}
+	
+	@Test
+	void checkForNegativeNumbers() {    //Check, when string contains negative numbers is it throwing exception.
+		String input = new String("//.\n1.-4.-5.10.23.-54.-767.-77");
+		assertThrows(IllegalArgumentException.class, () -> {
+			StringCalculatorMain.addNumbers(input);
+		});
+	}
 
 }

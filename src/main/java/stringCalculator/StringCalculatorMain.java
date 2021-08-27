@@ -36,12 +36,23 @@ public class StringCalculatorMain {
 	
 	public static int calculateSum(String[] array) {
 		int sum = 0;
-		int integerNumber=0, arrayLength = array.length;
+		boolean isExceptionOccured = false;
+		String negativeNumberList = new String("");
+		int integerNumber = 0, arrayLength = array.length;
 		for(int index = 0; index < arrayLength; index++) {
 			integerNumber = stringToInteger(array[index]);
+			if(integerNumber < 0) {
+				negativeNumberList = negativeNumberList + integerNumber + ", ";
+				isExceptionOccured = true;
+			}
 			sum = sum + integerNumber;
 		}
-		return sum;
+		if(isExceptionOccured) {    //If negative number exists then throw exception with list of Negative numbers present in Input.
+			throw new IllegalArgumentException("Negatives Not Allowed: " + negativeNumberList);
+		}
+		else {    //If all numbers are positive then return sum.
+			return sum;
+		}
 	}
 	
 	public static int stringToInteger(String stringValue) {
