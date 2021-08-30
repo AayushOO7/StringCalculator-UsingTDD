@@ -7,7 +7,7 @@
 **College : Nirma University** <br/>
 
 ## Description 
-This repository contains the implementation of task mentioned at [osherove.com](https://osherove.com/tdd-kata-1). This program is developed in JAVA Language using Test Driven Development Approach with the help of JUnit5. 
+This repository contains the implementation of task mentioned at [osherove.com/tdd-kata-1](https://osherove.com/tdd-kata-1). This program is developed in JAVA Language using Test Driven Development Approach with the help of JUnit5. 
 
 ## Implementation
 To perform unit testing, I've used Java's **JUnit5 Testing Framework** which is used to write and run repeatable automated tests. JUnit provides annotations to identify test methods. I have created test cases in StringCalculatorJunitTest.java to incorporate unit testing for string calculator.
