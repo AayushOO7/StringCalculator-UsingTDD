@@ -2,7 +2,6 @@
 # String Calculator using TDD in JAVA
 
 **Name : Aayush Solanki** <br/>
-**Applied for role : Full Stack Developer** <br/>
 **Branch : CSE** <br/>
 **College : Nirma University** <br/>
 
